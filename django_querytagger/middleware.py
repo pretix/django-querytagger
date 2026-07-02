@@ -22,7 +22,7 @@ class SetTagMiddleware:
             tag = "url=no-resolver-match"
 
         if request_id_header and request_id_header in request.headers:
-            hval = request_id_clean.sub(request.headers[request_id_header], "")
+            hval = request_id_clean.sub("", request.headers[request_id_header])
             tag += f" request={hval}"
 
         with with_tag(tag):
