@@ -9,6 +9,6 @@ def wrapper(execute, sql, params, many, context):
             # https://www.postgresql.org/docs/current/sql-syntax-lexical.html#SQL-SYNTAX-COMMENTS
             raise ValueError("Tags are not allowed to contain * for security reasons")
         # Insert tag after first word (e.g. after SELECT) to keep query types highly visible
-        verb, remainder = sql.split(" ", 1)
-        sql = f"{verb} /* {tag} */ {remainder}"
+        verb, *remainder = sql.split(" ", 1)
+        sql = f"{verb} /* {tag} */ {remainder[0]}"
     return execute(sql, params, many, context)
