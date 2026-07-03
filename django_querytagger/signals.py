@@ -11,7 +11,8 @@ from .tagging import current_tag
 
 @receiver(connection_created)
 def on_connection_created(sender, connection, **kwargs):
-    connection.execute_wrappers.append(wrapper)
+    if wrapper not in connection.execute_wrappers:
+        connection.execute_wrappers.append(wrapper)
 
 
 @receiver(task_prerun)
